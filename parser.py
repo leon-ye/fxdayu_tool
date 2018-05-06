@@ -44,4 +44,4 @@ with open(model_path,encoding="utf-8") as f:
 		try:
 			ret=subprocess.call('dyfactor parse %s.py' %factor ,shell=True)
 		except:
-			print("检测到没有装大鱼的helper的库！！！%s无法检验，但不影响.py生成"%factor)
+			print("检测到没有装大鱼的helper的库！！！%s无法检验，但不影响%.py生成"%(factor,factor))
