@@ -2,7 +2,8 @@
 from sys import argv
 import re
 import subprocess
-_,excel_name=argv
+parser_path,excel_name=argv
+model_path=parser_path.replace("parser.py","model.py")
 author_model="--author--"
 description_model="--factor_description--"
 params_description_model="--params_description--"
@@ -12,7 +13,7 @@ formula_model="--formula--"
 format_model="--format--"
 author=input("please input your name")
 compiler=re.compile("([0-9]+)")
-with open("model.py",encoding="utf-8") as f:
+with open(model_path,encoding="utf-8") as f:
 	df=pd.read_excel(excel_name)
 	content=f.read()
 	factors=df.index
@@ -30,10 +31,10 @@ with open("model.py",encoding="utf-8") as f:
 		params_description=dict()
 		param=compiler.findall(param)
 		format_content=[]
-		for i in range(len(param)):
-			parameters['t%d'%(i+1)]=int(param[i])
-			format_content.append("params['t%d']"%(i+1))
-			params_description['t%d'%(i+1)]="暂无"
+		for i in range(1,len(param)+1):
+			parameters['t%d'%i]=int(param[i-1])
+			format_content.append("params['t%d']"%i)
+			params_description['t%d'%i]="暂无"
 		temp=temp.replace(params_description_model,str(params_description))
 		format_content=",".join(format_content)
 		temp=temp.replace(format_model,format_content)
