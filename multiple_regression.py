@@ -3,7 +3,7 @@ def Multi_Regression(index,n,Y,*X):
     index是指返回的系数矩阵中第几个，从0开始，0代表常数项，1代表第一个系数的值
     n是rolling多少天
     Y是因变量矩阵
-    *X传入list或者set或者tuple，list的元素是每一个矩阵
+    *X传入自变量，无论多少个，往后填充就行
     """
     from numpy.linalg import inv,LinAlgError
     import numpy as np
